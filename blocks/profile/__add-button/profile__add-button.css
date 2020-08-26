@@ -5,4 +5,7 @@
   height: 50px;
   margin-left: auto;
   align-self: center;
+  background-image: url(../../../images/profile__add-button_img.svg);
+  background-repeat: no-repeat;
+  background-position: center;
 }

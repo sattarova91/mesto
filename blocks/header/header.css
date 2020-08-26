@@ -1,4 +1,7 @@
 .header {
   border-bottom: 1px solid #545454;
   padding-bottom: 40.6px;
+  display: flex;
+  flex-direction: row;
+  justify-content: start
 }

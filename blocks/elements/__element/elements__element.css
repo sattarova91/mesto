@@ -1,0 +1,8 @@
+.elements__element {
+  background-color: white;
+  padding-left: 0px;
+  list-style-type: none;
+  width: 282px;
+  margin: 10.5px 9px;
+  border-radius: 10px;
+}

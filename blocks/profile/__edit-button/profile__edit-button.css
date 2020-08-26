@@ -4,4 +4,7 @@
   border: 1px solid #FFFFFF;
   margin-top: 19px;
   margin-left: 17px;
+  background-image: url(../../../images/profile__edit-button_img.svg);
+  background-repeat: no-repeat;
+  background-position: center;
 }

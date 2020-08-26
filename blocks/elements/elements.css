@@ -1,0 +1,23 @@
+@import url(./__element/elements__element.css);
+@import url(./__img/element__img.css);
+@import url(./__like-button/element__like-button.css);
+@import url(./__title/element__title.css);
+@import url(./__like-button/_img/element__like-button_img.css);
+.elements {
+  display: flex;
+  padding-left: 0px;
+  flex-flow: wrap;
+  margin: -10.5px -9px;
+}
+
+@media screen and (max-width: 1280px) {
+  .elements {
+    justify-content: center;
+  }
+}
+
+@media screen and (min-width: 1281px) {
+  .elements {
+    justify-content: center;
+  }
+}
