@@ -1,0 +1,12 @@
+.popup__save-button {
+  margin-top: 18px;
+  background-image: url(../../../images/Сохранить\ button.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 50px;
+  width: 100%;
+}
+
+.popup__save-button:hover {
+  opacity: 0.8;
+}

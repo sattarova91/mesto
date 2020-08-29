@@ -5,5 +5,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-family: Inter;
+  font-family: Inter, sans-serif;
+}
+
+@media screen and (max-width: 410px) {
+  .page {
+    padding: 28px 6% 36px 6%;
+  }
 }

@@ -1,62 +1,91 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mesto</title>
-    <link rel="stylesheet" href="./pages/index.css">
-    <link rel="stylesheet" href="./script.js">
-    <meta name="author" content="Анастасия Чурикова">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+  <link rel="stylesheet" href="./pages/index.css">
+  <link rel="stylesheet" href="./script.js">
+  <meta name="author" content="Анастасия Чурикова">
 </head>
+
 <body>
-    <div class="page">
-        <header class="header">
-            <img class="logo logo_place-header" src="./images/mesto-logo.svg" alt="аватар">
-        </header>
-        <section class="profile">
-          <img class="avatar avatar_place-profile" src="./images/profile-image.svg">
-          <div class="profile__info">
-            <p class="profile__info_name">Жак-Ив Кусто</p>
-            <p class="profile__info_job">Исследователь океана</p>
-          </div>
-          <button class="button profile__edit-button"></button>
-          <button class="button profile__add-button"></button>
-        </section>
-        <ul class="elements">
-          <li class="elements__element">
-            <img class="element__img" src="./images/karachevsk.jpg" alt="Карачаевск">
-            <h2 class="element__title">Карачаевск</h2>
-            <button class="button element__like-button"></button>
-          </li>
-          <li class="elements__element">
-            <img class="element__img" src="./images/goraElbrus.jpg" alt="гора Эльбрус">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="button element__like-button"></button>
-          </li>
-          <li class="elements__element">
-            <img class="element__img" src="./images/dombai.jpg" alt="Домбай">
-            <h2 class="element__title">Домбай</h2>
-            <button class="button element__like-button"></button>
-          </li>
-          <li class="elements__element">
-            <img class="element__img" src="./images/goraElbrus.jpg" alt="гора Эльбрус">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="button element__like-button"></button>
-          </li>
-          <li class="elements__element">
-            <img class="element__img" src="./images/dombai.jpg" alt="Домбай">
-            <h2 class="element__title">Домбай</h2>
-            <button class="button element__like-button"></button>
-          </li>
-          <li class="elements__element">
-            <img class="element__img" src="./images/karachevsk.jpg" alt="Карачаево-Черкесия">
-            <h2 class="element__title">Карачаево-Черкессия</h2>
-            <button class="button element__like-button"></button>
-          </li>
-        </ul>
-        <footer class="footer">
-          <p class="footer__copyrigth">&copy;&nbsp;2020 Mesto Russia</p>
-        </footer>
-    </div>
+  <div class="page">
+    <header class="header">
+      <img class="logo logo_place-header" src="./images/mesto-logo.svg" alt="аватар">
+    </header>
+    <section class="profile">
+      <img class="avatar avatar_place-profile" src="./images/profile-image.svg">
+      <div class="profile__container">
+        <div class="profile__info">
+          <p class="profile__info_name">Жак-Ив Кусто</p>
+          <p class="profile__info_job">Исследователь океана</p>
+        </div>
+        <button class="button profile__edit-button"></button>
+      </div>
+      <button class="button profile__add-button"></button>
+    </section>
+    <ul class="elements">
+      <li class="elements__element">
+        <img class="elements__img" src="./images/karachevsk.jpg" alt="Карачаевск">
+        <div class="elements__card-info">
+          <h2 class="elements__title">Карачаевск</h2>
+          <button class="button elements__like-button"></button>
+        </div>
+      </li>
+      <li class="elements__element">
+        <img class="elements__img" src="./images/goraElbrus.jpg" alt="гора Эльбрус">
+        <div class="elements__card-info">
+          <h2 class="elements__title">Гора Эльбрус</h2>
+          <button class="button elements__like-button"></button>
+        </div>
+      </li>
+      <li class="elements__element">
+        <img class="elements__img" src="./images/dombai.jpg" alt="Домбай">
+        <div class="elements__card-info">
+          <h2 class="elements__title">Домбай</h2>
+          <button class="button elements__like-button"></button>
+        </div>
+      </li>
+      <li class="elements__element">
+        <img class="elements__img" src="./images/goraElbrus.jpg" alt="гора Эльбрус">
+        <div class="elements__card-info">
+          <h2 class="elements__title">Гора Эльбрус</h2>
+          <button class="button elements__like-button"></button>
+        </div>
+      </li>
+      <li class="elements__element">
+        <img class="elements__img" src="./images/dombai.jpg" alt="Домбай">
+        <div class="elements__card-info">
+          <h2 class="elements__title">Домбай</h2>
+          <button class="button elements__like-button"></button>
+        </div>
+      </li>
+      <li class="elements__element">
+        <img class="elements__img" src="./images/karachevsk.jpg" alt="Карачаево-Черкесcия">
+        <div class="elements__card-info">
+          <h2 class="elements__title">Карачаево-Черкессия</h2>
+          <button class="button elements__like-button"></button>
+        </div>
+      </li>
+    </ul>
+    <footer class="footer">
+      <p class="footer__copyrigth">&copy;&nbsp;2020 Mesto Russia</p>
+    </footer>
+    <section class="popup">
+      <div class="popup__container">
+        <button class="button popup__close"></button>
+        <div class="popup__edit-profile">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <input class="popup__field" type="text" placeholder="Имя" name="name">
+          <input class="popup__field" type="text" placeholder="Род деятельности" name="job">
+          <button class="button popup__save-button"></button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <>
 </body>
+
 </html>

@@ -7,4 +7,9 @@
 .button:hover {
   transition: 0.3s linear;
   opacity: 0.6;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
 }

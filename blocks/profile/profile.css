@@ -5,8 +5,28 @@
 @import url(./__edit-button/_img/profile__edit-button_img.css);
 @import url(./__add-button/profile__add-button.css);
 @import url(./__add-button/_img/profile__add-button_img.css);
+@import url(./__container/profile__container.css);
 .profile {
-  padding-top: 36.25px;
+  padding-top: 37px;
   display: flex;
-  padding-bottom: 47.25px;
+  padding-bottom: 48px;
+}
+
+
+@media screen and (max-width: 915px) {
+  .profile {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .profile {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .profile {
+    padding-bottom: 36px;
+  }
 }

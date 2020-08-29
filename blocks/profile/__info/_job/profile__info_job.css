@@ -7,3 +7,14 @@
   margin-top: 0px;
   margin-left: 30px;
 }
+
+@media screen and (max-width: 700px) {
+  .profile__info_job {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
