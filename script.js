@@ -25,14 +25,12 @@ function fillPopupFields () {
 popupOpenButton.addEventListener('click', fillPopupFields)
 
 const submitButton = document.querySelector('.popup__save-button')
-console.log (submitButton)
 
 function submitPopup (evt) {
   evt.preventDefault();
-  alert('asd')
   profileJob.textContent = popupJob.value
   profileName.textContent = popupName.value
 }
 
-submitButton.addEventListener('submit', submitPopup)
+submitButton.addEventListener('click', submitPopup)
 submitButton.addEventListener('click', popupToggle)
