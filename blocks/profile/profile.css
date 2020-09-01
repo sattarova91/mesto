@@ -2,9 +2,7 @@
 @import url(./__info/_name/profile__info_name.css);
 @import url(./__info/_job/profile__info_job.css);
 @import url(./__edit-button/profile__edit-button.css);
-@import url(./__edit-button/_img/profile__edit-button_img.css);
 @import url(./__add-button/profile__add-button.css);
-@import url(./__add-button/_img/profile__add-button_img.css);
 @import url(./__container/profile__container.css);
 .profile {
   padding-top: 37px;
