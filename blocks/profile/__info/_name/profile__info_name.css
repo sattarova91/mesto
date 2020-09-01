@@ -10,6 +10,13 @@
 
 @media screen and (max-width: 700px) {
   .profile__info_name {
+    margin-bottom: 0px;
+    margin-left: 0px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .profile__info_name {
     font-family: Inter;
     font-style: normal;
     font-weight: 500;

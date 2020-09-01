@@ -7,6 +7,7 @@
   background-image: url(../../../images/profile__edit-button_img.svg);
   background-repeat: no-repeat;
   background-position: center;
+  align-self: flex-start;
 }
 
 @media screen and (max-width: 410px) {

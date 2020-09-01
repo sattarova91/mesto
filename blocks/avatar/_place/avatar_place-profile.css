@@ -3,3 +3,10 @@
   height: 120px;
   border-radius: 50%;
 }
+
+
+@media screen and (max-width: 700px) {
+  .avatar_place-profile {
+    align-self: center;
+  }
+}
