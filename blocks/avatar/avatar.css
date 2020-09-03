@@ -1,4 +1,12 @@
-@import url(./_place/avatar_place-profile.css);
 .avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
 
+
+@media screen and (max-width: 700px) {
+  .avatar {
+    align-self: center;
+  }
 }

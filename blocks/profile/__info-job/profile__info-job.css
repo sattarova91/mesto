@@ -1,4 +1,4 @@
-.profile__info_job {
+.profile__info-job {
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -9,14 +9,14 @@
 }
 
 @media screen and (max-width: 700px) {
-  .profile__info_job {
+  .profile__info-job {
     align-self: center;
     margin-left: 0px;
   }
 }
 
 @media screen and (max-width: 500px) {
-  .profile__info_job {
+  .profile__info-job {
     font-family: Inter;
     font-style: normal;
     font-weight: normal;

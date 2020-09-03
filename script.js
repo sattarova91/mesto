@@ -11,8 +11,8 @@ function popupToggle () {
 popupOpenButton.addEventListener('click', popupToggle)
 popupCloseButton.addEventListener('click', popupToggle)
 
-const profileName = document.querySelector('.profile__info_name')
-const profileJob = document.querySelector('.profile__info_job')
+const profileName = document.querySelector('.profile__info-name')
+const profileJob = document.querySelector('.profile__info-job')
 const popupJob = document.querySelector('.popup__field[name="job"]')
 const popupName = document.querySelector('.popup__field[name="name"]')
 

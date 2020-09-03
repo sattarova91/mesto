@@ -1,4 +1,4 @@
-@import url(./__element/elements__element.css);
+@import url(./__item/elements__item.css);
 @import url(./__img/elements__img.css);
 @import url(./__like-button/elements__like-button.css);
 @import url(./__title/elements__title.css);
@@ -7,17 +7,7 @@
   display: flex;
   padding-left: 0px;
   flex-flow: wrap;
-  margin: -10.5px -9px;
+  margin: -10px -10px;
+  justify-content: center;
 }
 
-@media screen and (max-width: 1280px) {
-  .elements {
-    justify-content: center;
-  }
-}
-
-@media screen and (min-width: 1281px) {
-  .elements {
-    justify-content: center;
-  }
-}
