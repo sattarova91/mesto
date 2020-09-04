@@ -1,8 +1,12 @@
 .elements__item {
   background-color: #ffffff;
-  padding-left: 0px;
   list-style-type: none;
   width: 282px;
-  margin: 10px 10px;
   border-radius: 10px;
+  margin-right: 18px;
+  margin-bottom: 20px;
+}
+
+.elements__item:nth-child(3n) {
+  margin-right: 0px;
 }

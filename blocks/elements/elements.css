@@ -5,9 +5,10 @@
 @import url(./__card-info/elements__card-info.css);
 .elements {
   display: flex;
-  padding-left: 0px;
   flex-flow: wrap;
-  margin: -10px -10px;
   justify-content: center;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 0px;
 }
 
