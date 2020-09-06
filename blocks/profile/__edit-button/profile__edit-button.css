@@ -2,11 +2,9 @@
   height: 24px;
   width: 24px;
   border: 1px solid #FFFFFF;
-  margin-top: 19px;
   background-image: url(../../../images/profile__edit-button_img.svg);
   background-repeat: no-repeat;
   background-position: center;
-  align-self: flex-start;
 }
 
 @media screen and (max-width: 410px) {
