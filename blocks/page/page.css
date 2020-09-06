@@ -1,7 +1,6 @@
 .page {
   background-color: #000000;
-  max-width: 1280px;
-  padding: 4% 15% 6% 15%;
+  padding: 45px 199px 60px 199px;
   font-family: Inter, sans-serif;
   margin: 0 auto;
   max-width: 882px;
@@ -9,6 +8,6 @@
 
 @media screen and (max-width: 410px) {
   .page {
-    padding: 50% 6% 10% 50%;
+    padding: 28px 19px 36px 19px;
   }
 }
