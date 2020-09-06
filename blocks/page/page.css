@@ -4,10 +4,11 @@
   font-family: Inter, sans-serif;
   margin: 0 auto;
   max-width: 882px;
+  padding: 4% 15% 6% 15%;
 }
 
 @media screen and (max-width: 410px) {
   .page {
-    padding: 28px 19px 36px 19px;
+    padding: 8% 6% 10% 6%;
   }
 }
