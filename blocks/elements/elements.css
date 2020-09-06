@@ -3,12 +3,16 @@
 @import url(./__like-button/elements__like-button.css);
 @import url(./__title/elements__title.css);
 @import url(./__card-info/elements__card-info.css);
+
 .elements {
   display: flex;
   flex-flow: wrap;
   justify-content: center;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  margin: 0px;
   padding-left: 0px;
+  max-width: 882px;
+  list-style-type: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 

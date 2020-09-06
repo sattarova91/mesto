@@ -7,13 +7,4 @@
   position: absolute;
   top: -37px;
   right: -37px;
-  border: none;
-}
-
-@media screen and (max-width: 550px) {
-  .popup__close {
-    top: 0px;
-    right: 0px;
-    background: url(../../../images/close-button-black.png) no-repeat center;
-  }
 }

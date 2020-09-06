@@ -1,6 +1,7 @@
 @import url(./__copyrigth/footer__copyrigth.css);
 .footer {
   padding-top: 46px;
+  max-width: 882px;
 }
 
 @media screen and (max-width: 410px) {

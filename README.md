@@ -5,6 +5,8 @@
 ### Использованные технологии:
 + Методология БЭМ;
 + Адаптивная верстка;
-+ ReactJS
++ HTML
++ CSS
++ JavaScript
 ### Ссылка Github:
 https://sattarova91.github.io/mesto/

@@ -2,6 +2,7 @@
   box-sizing: border-box;
   background-color: #000000;
   padding: 0px;
+  border: 0;
 }
 
 .button:hover {
