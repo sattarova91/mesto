@@ -6,5 +6,11 @@
   flex-direction: row;
   justify-content: start;
   max-width: 882px;
-  padding: 45px 0 0;
+  padding: 45px 0 40px;
+}
+
+@media screen and (max-width: 922px) {
+  .header {
+    padding: 28px 0 30px;
+  }
 }
