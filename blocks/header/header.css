@@ -1,5 +1,4 @@
 @import url(./__logo/header__logo.css);
-
 .header {
   border-bottom: 1px solid #545454;
   padding-bottom: 40px;
@@ -7,4 +6,5 @@
   flex-direction: row;
   justify-content: start;
   max-width: 882px;
+  padding: 45px 0 0;
 }

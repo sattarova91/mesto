@@ -6,8 +6,8 @@
 
 .elements {
   display: grid;
-  grid-template-columns: repeat( auto-fit, minmax(282px, 1fr) );
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat( auto-fit, 282px );
+  grid-template-rows: repeat( auto-fit, 1fr);
   grid-column-gap: 18px;
   grid-row-gap: 21px;
   padding-left: 0px;
@@ -15,5 +15,6 @@
   list-style-type: none;
   margin-block-start: 0;
   margin-block-end: 0;
+  justify-content: center;
 }
 
