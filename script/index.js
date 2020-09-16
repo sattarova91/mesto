@@ -1,5 +1,5 @@
 
-const popup = document.querySelector('.popup')
+const popup = document.querySelector('.popup-edit')
 const popupOpenButton = document.querySelector('.profile__edit-button')
 const popupCloseButton = popup.querySelector('.popup__close')
 

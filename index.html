@@ -75,17 +75,28 @@
   <footer class="footer">
     <p class="footer__copyrigth">&copy;&nbsp;2020 Mesto Russia</p>
   </footer>
-  <form class="popup" name="popup" method="POST" action="#">
-    <div class="popup__container">
-      <button class="button popup__close" type="button"></button>
-      <div class="popup__edit-profile">
+  <div class="popup popup-edit">
+    <form class="popup-edit__form" name="popup-edit__form" method="POST" action="#">
+      <div class="popup__container">
+        <button class="button popup__close" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <input class="popup__field" type="text" placeholder="Имя" name="name">
         <input class="popup__field" type="text" placeholder="Род деятельности" name="job">
-        <button class="button popup__save-button" type="submit">Сохранить</button>
+        <button class="button popup-edit__save-button" type="submit">Сохранить</button>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
+  <div class="popup popup-add">
+    <form class="popup-add__form" name="popup-add__form" method="POST" action="#">
+      <div class="popup__container">
+        <button class="button popup__close" type="button"></button>
+        <h2>Новое место</h2>
+        <input class="popup__field" type="text" placeholder="Название" name="title">
+        <input class="popup__field" type="text" placeholder="Ссылка" name="link">
+        <button class="button popup-add__add-button" type="submit">Создать</button>
+      </div>
+    </form>
+  </div>
   <script src="./script/index.js" defer></script>
 </body>
 

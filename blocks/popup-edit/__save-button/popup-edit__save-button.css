@@ -1,4 +1,4 @@
-.popup__save-button {
+.popup-edit__save-button {
   margin-top: 18px;
   background-image: url(../../../images/save-button.svg);
   background-position: center;
@@ -8,6 +8,7 @@
   color: #ffffff;
 }
 
-.popup__save-button:hover {
+.popup-edit__save-button:hover {
   opacity: 0.8;
 }
+
