@@ -1,20 +1,20 @@
 
-const popup = document.querySelector('.popup-edit')
-const popupOpenButton = document.querySelector('.profile__edit-button')
-const popupCloseButton = popup.querySelector('.popup__close')
+const popupEdit = document.querySelector('.popup-edit')
+const popupEditOpenButton = document.querySelector('.profile__edit-button')
+const popupEditCloseButton = popupEdit.querySelector('.popup__close')
 
 
-function popupToggle () {
+function popupToggle (popup) {
   popup.classList.toggle('popup_is-opened')
 }
 
-popupOpenButton.addEventListener('click', popupToggle)
-popupCloseButton.addEventListener('click', popupToggle)
+popupEditOpenButton.addEventListener('click', () => {popupToggle(popupEdit)})
+popupEditCloseButton.addEventListener('click', () => {popupToggle(popupEdit)})
 
 const profileName = document.querySelector('.profile__info-name')
 const profileJob = document.querySelector('.profile__info-job')
-const popupJob = document.querySelector('.popup__field[name="job"]')
-const popupName = document.querySelector('.popup__field[name="name"]')
+const popupJob = popupEdit.querySelector('.popup__field[name="job"]')
+const popupName = popupEdit.querySelector('.popup__field[name="name"]')
 
 
 function fillPopupFields () {
@@ -22,15 +22,24 @@ function fillPopupFields () {
   popupName.value = profileName.textContent
 }
 
-popupOpenButton.addEventListener('click', fillPopupFields)
+popupEditOpenButton.addEventListener('click', fillPopupFields)
 
-const submitButton = document.querySelector('.popup__save-button')
+const submitEditButton = popupEdit.querySelector('.popup-edit__save-button')
 
-function submitPopup (evt) {
+function submitEditPopup (evt) {
   evt.preventDefault();
   profileJob.textContent = popupJob.value
   profileName.textContent = popupName.value
 }
 
-submitButton.addEventListener('click', submitPopup)
-submitButton.addEventListener('click', popupToggle)
+submitEditButton.addEventListener('click', submitEditPopup)
+submitEditButton.addEventListener('click', () => {popupToggle(popupEdit)})
+
+const popupAdd = document.querySelector('.popup-add')
+const popupAddOpenButton = document.querySelector('.profile__add-button')
+const popupAddCloseButton = popupAdd.querySelector('.popup__close')
+
+
+popupAddOpenButton.addEventListener('click', () => {popupToggle(popupAdd)})
+popupAddCloseButton.addEventListener('click', () => {popupToggle(popupAdd)})
+

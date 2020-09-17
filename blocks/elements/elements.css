@@ -3,6 +3,7 @@
 @import url(./__like-button/elements__like-button.css);
 @import url(./__title/elements__title.css);
 @import url(./__card-info/elements__card-info.css);
+@import url(./__delete-button/elements__delete-button.css);
 
 .elements {
   display: grid;

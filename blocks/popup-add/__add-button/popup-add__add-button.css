@@ -6,11 +6,23 @@
   height: 50px;
   width: 100%;
   color: #ffffff;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
 }
 
 .popup-add__add-button:hover {
   opacity: 0.8;
 }
 
+@media screen and (max-width: 500px) {
+  .popup-add__add-button {
+    font-size: 14px;
+    margin-top: 16px;
+    line-height: 17px;
+    height: 40px;
+
+  }
+}
 
 
