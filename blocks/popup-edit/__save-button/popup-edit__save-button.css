@@ -6,9 +6,18 @@
   height: 50px;
   width: 100%;
   color: #ffffff;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
 }
 
 .popup-edit__save-button:hover {
   opacity: 0.8;
 }
 
+@media screen and (max-width: 500px) {
+  .popup-edit__save-button {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

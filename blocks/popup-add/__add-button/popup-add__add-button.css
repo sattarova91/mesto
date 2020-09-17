@@ -1,0 +1,16 @@
+.popup-add__add-button {
+  margin-top: 18px;
+  background-image: url(../../../images/save-button.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 50px;
+  width: 100%;
+  color: #ffffff;
+}
+
+.popup-add__add-button:hover {
+  opacity: 0.8;
+}
+
+
+
