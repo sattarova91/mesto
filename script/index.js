@@ -45,7 +45,7 @@ function likeToggle (likeButton) {
 }
 
 
-let cards = [
+const cards = [
     {
         name: 'Архыз',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -84,7 +84,10 @@ function renderCard(card)  {
   cardsContainer.prepend(cardHTML);
   let likeButton = cardsContainer.querySelector('.elements__like-button');
   likeButton.addEventListener('click', () => {likeToggle(likeButton)});
-
+  let deleteButton = cardsContainer.querySelector('.elements__delete-button');
+  deleteButton.addEventListener('click', (evt) =>{
+    evt.target.parentElement.remove()
+  })
 }
 
 function renderCards() {
@@ -95,7 +98,6 @@ function addCard(card) {
   if (!card.name || !card.link) {
     alert('Заполните поля "название" и "ссылка" у карточки');
   } else {
-    cards.unshift(card);
     renderCard(card);
   }
 }
@@ -133,7 +135,5 @@ popupAddCreateButton.addEventListener('click', () => {
   popupAddLink.value = '';
   popupAddTitle.value = '';
 });
-
-
 
 renderCards();
