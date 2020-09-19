@@ -4,7 +4,7 @@
 @import url(./__title/popup__title.css);
 
 .popup {
-  display: none;
+  display: flex;
   position: fixed;
   background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
@@ -13,5 +13,8 @@
   left: 0;
   justify-content: center;
   align-items: center;
+  visibility: hidden;
+  transition: visibility .2s,opacity .4s ease-in-out;
+  opacity: 0;
 }
 
