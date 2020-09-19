@@ -82,8 +82,19 @@ function renderCard(card)  {
   cardHTML.querySelector('.elements__img').src = card.link;
   cardHTML.querySelector('.elements__img').alt = card.name;
   cardsContainer.prepend(cardHTML);
+
+  let cardImg = cardsContainer.querySelector('.elements__img');
+  cardImg.addEventListener('click', (evt) => {
+    popupToggle(popupOpenImg)
+    let cardHTML = evt.target.parentElement
+    popupOpenImg.querySelector('.popup-open-img__card-image').src = cardHTML.querySelector('.elements__img').src
+    popupOpenImg.querySelector('.popup-open-img__title').textContent = cardHTML.querySelector('.elements__title').textContent
+
+  });
+
   let likeButton = cardsContainer.querySelector('.elements__like-button');
   likeButton.addEventListener('click', () => {likeToggle(likeButton)});
+
   let deleteButton = cardsContainer.querySelector('.elements__delete-button');
   deleteButton.addEventListener('click', (evt) =>{
     evt.target.parentElement.remove()
@@ -137,3 +148,11 @@ popupAddCreateButton.addEventListener('click', () => {
 });
 
 renderCards();
+
+//OPEN CARD IMG
+
+const popupOpenImg = document.querySelector('.popup-open-img');
+const popupOpenImgCloseButton = popupOpenImg.querySelector('.popup-open-img__close');
+const popupOpenImgTitle = popupOpenImg.querySelector('.popup-open-img__title');
+
+popupOpenImgCloseButton.addEventListener('click', () => {popupToggle(popupOpenImg)});
