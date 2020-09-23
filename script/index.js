@@ -25,16 +25,12 @@ function fillPopupEditFields() {
 
 popupEditOpenButton.addEventListener('click', fillPopupEditFields)
 
-const submitEditButton = popupEdit.querySelector('.popup-edit__save-button')
+const popupEditForm = popupEdit.querySelector('.popup-edit__form')
 
-function submitEditPopup(evt) {
+popupEditForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   profileJob.textContent = popupJob.value
   profileName.textContent = popupName.value
-}
-
-submitEditButton.addEventListener('click', () => {
-  submitEditPopup();
   popupToggle(popupEdit);
 })
 
@@ -79,50 +75,36 @@ const cardTemplate = document.querySelector('#cards').content;
 const cardsContainer = document.querySelector('.elements');
 
 // формирует #document-fragment секции .elements со всеми нужными полями
-function makeHTMLCard(card) {
+// и листенарами
+function renderCard(card) {
   const cardHTML = cardTemplate.cloneNode(true);
+
   cardHTML.querySelector('.elements__title').textContent = card.name;
-  cardHTML.querySelector('.elements__img').src = card.link;
-  cardHTML.querySelector('.elements__img').alt = card.name;
-  return cardHTML
-}
 
-// добавляет карточку в DOM и возвращает полноценную DOM-node этой карточки
-function renderCard(card, isPrepend) {
-  // cardHTML не полноценный DOM объект - он имеет тип "#document-fragment"
-  // из-за этого нельзя навешать listener'ов на его под-элементы (например
-  // на '.elements__img')
-  let cardHTML = makeHTMLCard(card);
-  if (isPrepend) {
-    cardsContainer.prepend(cardHTML);
-    cardHTML = cardsContainer.querySelector('.elements__item')
-  } else {
-    cardsContainer.append(cardHTML);
-    cardHTML = cardsContainer.querySelector('.elements__item:last-of-type')
-  }
+  const cardImg = cardHTML.querySelector('.elements__img');
+  cardImg.src = card.link;
+  cardImg.alt = card.name;
+  cardImg.addEventListener('click', () => {
+    popupOpenImg.querySelector('.popup-open-img__card-image').src = card.link
+    popupOpenImg.querySelector('.popup-open-img__title').textContent = card.name
+    popupToggle(popupOpenImg)
+  });
 
-  // // что бы избавиться от фрагмента мы ищем тот же самый элемент, который
-  // // только что добавили, но уже с помощью селектора
+  const likeButton = cardHTML.querySelector('.elements__like-button');
+  likeButton.addEventListener('click', () => { likeToggle(likeButton) });
+
+  const deleteButton = cardHTML.querySelector('.elements__delete-button');
+  deleteButton.addEventListener('click', (evt) => {
+    evt.target.parentElement.remove()
+  })
+
   return cardHTML
 }
 
 function renderInitialCards() {
   cards.forEach((card) => {
     const cardHTML = renderCard(card)
-    const cardImg = cardHTML.querySelector('.elements__img');
-    cardImg.addEventListener('click', () => {
-      popupOpenImg.querySelector('.popup-open-img__card-image').src = card.link
-      popupOpenImg.querySelector('.popup-open-img__title').textContent = card.name
-      popupToggle(popupOpenImg)
-    });
-
-    let likeButton = cardHTML.querySelector('.elements__like-button');
-    likeButton.addEventListener('click', () => { likeToggle(likeButton) });
-
-    let deleteButton = cardHTML.querySelector('.elements__delete-button');
-    deleteButton.addEventListener('click', (evt) => {
-      evt.target.parentElement.remove()
-    })
+    cardsContainer.append(cardHTML);
   });
 
 }
@@ -149,17 +131,22 @@ popupAddCloseButton.addEventListener('click', () => {
 const popupAddForm = popupAdd.querySelector('.popup-add__form');
 popupAddForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  renderCard({
+  const card = {
     name: popupAddTitle.value,
     link: popupAddLink.value
-  }, true);
+  };
+  if (!card.name || !card.link) {
+    alert('Заполните поля "название" и "ссылка" у карточки');
+    return false;
+  }
 
-  popupAddCleanFields();
+  const cardHTML = renderCard(card);
+
+  cardsContainer.prepend(cardHTML);
+
   popupToggle(popupAdd);
+  popupAddCleanFields();
 });
-
-
-renderInitialCards();
 
 //OPEN CARD IMG
 
@@ -168,3 +155,7 @@ const popupOpenImgCloseButton = popupOpenImg.querySelector('.popup-open-img__clo
 const popupOpenImgTitle = popupOpenImg.querySelector('.popup-open-img__title');
 
 popupOpenImgCloseButton.addEventListener('click', () => { popupToggle(popupOpenImg) });
+
+// Everything else
+
+renderInitialCards();
