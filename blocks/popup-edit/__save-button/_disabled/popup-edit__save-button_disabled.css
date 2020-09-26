@@ -1,0 +1,5 @@
+.popup-edit__save-button_disabled {
+  background-image: url(../../../images/save-button_disabled.svg);
+  cursor: none;
+  border: 1px solid red;
+}

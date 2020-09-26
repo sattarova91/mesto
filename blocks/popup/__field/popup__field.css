@@ -9,3 +9,6 @@
   color: #000000;
 }
 
+.popup__field:invalid {
+  border-bottom: 1px solid #FF0000;
+}

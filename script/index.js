@@ -3,7 +3,7 @@
 const popupEdit = document.querySelector('.popup-edit')
 const popupEditOpenButton = document.querySelector('.profile__edit-button')
 const popupEditCloseButton = popupEdit.querySelector('.popup__close')
-
+const popupEditSubmitButton = popupEdit.querySelector('.popup-edit__save-button')
 
 function popupToggle(popup) {
   popup.classList.toggle('popup_is-opened')
@@ -26,6 +26,22 @@ function fillPopupEditFields() {
 popupEditOpenButton.addEventListener('click', fillPopupEditFields)
 
 const popupEditForm = popupEdit.querySelector('.popup-edit__form')
+
+function setSubmitButtonState(isFormValid) {
+  if(isFormValid) {
+    popupEditSubmitButton.removeAttribute('disabled');
+    popupEditSubmitButton.classList.remove('popup-edit__save-button_disabled');
+  }
+  else {
+    popupEditSubmitButton.setAttribute('disabled', true);
+    popupEditSubmitButton.classList.add('popup-edit__save-button_disabled');
+  }
+}
+
+popupEditForm.addEventListener('input', (evt) => {
+  const isValid = popupName.value.length > 0 && popupJob.value.length > 0
+  setSubmitButtonState(isValid)
+})
 
 popupEditForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
