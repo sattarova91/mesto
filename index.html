@@ -34,26 +34,41 @@
     <p class="footer__copyrigth">&copy;&nbsp;2020 Mesto Russia</p>
   </footer>
   <div class="popup popup-edit">
-    <form class="popup-edit__form" name="popup-edit__form" method="POST" action="#" novalidate>
+    <form class="popup__form popup-edit__form" name="popup-edit__form" method="POST" action="#">
       <div class="popup__container">
         <button class="button popup__close" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__field" type="text" placeholder="Имя" name="name" minlength="2" maxlength="40" required>
-        <input class="popup__field" type="text" placeholder="Род деятельности" minlength="2" maxlength="200" name="job" required>
-        <button class="button popup-edit__save-button" type="submit">Сохранить</button>
+        <label class="popup__field-container">
+          <input id="name-field" class="popup__field" type="text" placeholder="Имя" name="name" minlength="2"
+            maxlength="40" required>
+          <span id="name-field-error" class="popup__field-error"></span>
+        </label>
+        <label class="popup__field-container">
+          <input id="job-field" class="popup__field" type="text" placeholder="Род деятельности" minlength="2"
+            maxlength="200" name="job" required>
+          <span id="job-field-error" class="popup__field-error"></span>
+        </label>
+        <button class="button popup__save-button" type="submit">Сохранить</button>
       </div>
     </form>
   </div>
   <div class="popup popup-add">
-    <form class="popup-add__form" name="popup-add__form" method="POST" action="#" novalidate>
-    <div class="popup__container popup-add__container">
-      <button class="button popup__close popup-add__close" type="button"></button>
-      <h2 class="popup__title popup-add__title">Новое место</h2>
-      <input class="popup__field popup-add__field" type="text" minlength="2" maxlength="30" placeholder="Название" name="title" required>
-      <input class="popup__field popup-add__field" type="url" placeholder="Ссылка на картинку" name="link" required>
-      <button class="button popup-add__add-button" type="submit">Создать</button>
-    </div>
-  </form>
+    <form class="popup__form popup-add__form" name="popup-add__form" method="POST" action="#" novalidate>
+      <div class="popup__container popup-add__container">
+        <button class="button popup__close popup-add__close" type="button"></button>
+        <h2 class="popup__title popup-add__title">Новое место</h2>
+        <label class="popup__field-container">
+          <input id="title-field" class="popup__field popup-add__field" type="text" minlength="2" maxlength="30" placeholder="Название"
+            name="title" required>
+            <span id="title-field-error" class="popup__field-error"></span>
+        </label>
+        <label class="popup__field-container">
+          <input id="link-field" class="popup__field popup-add__field" type="url" placeholder="Ссылка на картинку" name="link" required>
+          <span id="link-field-error" class="popup__field-error"></span>
+        </label>
+        <button class="button popup__save-button" type="submit">Создать</button>
+      </div>
+    </form>
   </div>
   <div class="popup popup-open-img">
     <div class="popup-open-img__container">
@@ -63,6 +78,7 @@
     </div>
   </div>
   <script src="./script/index.js" defer></script>
+  <script src="./script/validate.js" defer></script>
   <template class="card__template" id="cards">
     <li class="elements__item">
       <img class="elements__img">
