@@ -26,7 +26,14 @@ function popupOpen(popup) {
   if (form) {
     const fieldList = Array.from(popup.querySelectorAll('.popup__field'))
     const button = popup.querySelector('.popup__save-button');
-    toggleButtonState(fieldList, button)
+    toggleButtonState(
+      {
+        submitButtonSelector: '.popup__save-button',
+        inactiveButtonClass: 'popup__save-button_disabled'
+      },
+      fieldList,
+      button
+    )
   }
   popupToggle(popup)
 }
@@ -55,28 +62,10 @@ popupEditForm.addEventListener('submit', (evt) => {
 })
 
 
-const hasInvalidField = (fieldList) => {
-  return fieldList.some((field) => {
-    return !field.validity.valid;
-  })
-};
-
-const toggleButtonState = (fieldList, button) => {
-  if (hasInvalidField(fieldList)) {
-    button.setAttribute('disabled', true);
-    button.classList.add('popup__save-button_disabled');
-  } else {
-    button.removeAttribute('disabled');
-    button.classList.remove('popup__save-button_disabled');
-  }
-};
-
-
 const setAllPopupEventListeners = () => {
   popupList = Array.from(document.querySelectorAll('.popup'));
   popupList.forEach(setPopupEventListeners)
 }
-
 
 const setPopupEventListeners = (popup) => {
   const form = popup.querySelector('.popup__form')
@@ -84,7 +73,6 @@ const setPopupEventListeners = (popup) => {
     form.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
-    enablePopupValidation(popup)
   }
 
   popup.addEventListener('click', (evt) => {
@@ -107,45 +95,7 @@ document.addEventListener('keydown', (evt) => {
   }
 })
 
-
-const enablePopupValidation = (popup) => {
-  const fieldList = Array.from(popup.querySelectorAll('.popup__field'));
-  const button = popup.querySelector('.popup__save-button');
-
-  fieldList.forEach((field) => {
-    field.addEventListener('input', () => {
-      isValid(popup, field)
-      toggleButtonState(fieldList, button);
-    })
-  })
-}
-
 setAllPopupEventListeners()
-
-
-
-const showFieldError = (container, field, errorMessage) => {
-  const errorElement = container.querySelector(`#${field.id}-error`)
-  errorElement.classList.add('popup__field-error_active')
-  errorElement.textContent = errorMessage;
-};
-
-const hideFieldError = (container, field) => {
-  const errorElement = container.querySelector(`#${field.id}-error`)
-  errorElement.classList.remove('popup__field-error_active')
-  errorElement.textContent = '';
-};
-
-const isValid = (container, field) => {
-
-  if (!field.validity.valid) {
-    showFieldError(container, field, field.validationMessage);
-    return true;
-  } else {
-    hideFieldError(container, field);
-    return false;
-  }
-};
 
 
 //CARDS UI
