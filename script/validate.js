@@ -15,24 +15,22 @@ const toggleButtonState = (selectors, fieldList, button) => {
 };
 
 const showFieldError = (selectors, container, field, errorMessage) => {
-  const errorElement = container.querySelector(`#${field.id}-error`)
-  errorElement.classList.add(selectors.inputErrorClass)
+  const errorElement = container.querySelector(`#${field.id}-error`);
+  errorElement.classList.add(selectors.inputErrorClass);
   errorElement.textContent = errorMessage;
 };
 
 const hideFieldError = (selectors, container, field) => {
-  const errorElement = container.querySelector(`#${field.id}-error`)
-  errorElement.classList.remove(selectors.inputErrorClass)
-  errorElement.textContent = selectors.inputErrorClass;
+  const errorElement = container.querySelector(`#${field.id}-error`);
+  errorElement.classList.remove(selectors.inputErrorClass);
+  errorElement.textContent = "";
 };
 
-const isValid = (selectors, container, field) => {
-  if (!field.validity.valid) {
-    showFieldError(selectors, container, field, field.validationMessage);
-    return true;
-  } else {
+const processValidity = (selectors, container, field) => {
+  if (field.validity.valid) {
     hideFieldError(selectors, container, field);
-    return false;
+  } else {
+    showFieldError(selectors, container, field, field.validationMessage);
   }
 };
 
@@ -42,7 +40,7 @@ const enableFormValidation = (selectors, form) => {
 
   fieldList.forEach((field) => {
     field.addEventListener('input', () => {
-      isValid(selectors, form, field)
+      processValidity(selectors, form, field);
       toggleButtonState(selectors, fieldList, button);
     })
   })
@@ -50,7 +48,9 @@ const enableFormValidation = (selectors, form) => {
 
 function enableValidation(selectors) {
   formList = Array.from(document.querySelectorAll(selectors.formSelector));
-  formList.forEach((form) => {enableFormValidation(selectors, form) })
+  formList.forEach((form) => {
+    enableFormValidation(selectors, form);
+  });
 }
 
 enableValidation({

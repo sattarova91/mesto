@@ -1,12 +1,12 @@
 //POPUP EDIT
 
-const popupEdit = document.querySelector('.popup-edit')
-const popupEditOpenButton = document.querySelector('.profile__edit-button')
-const popupEditForm = popupEdit.querySelector('.popup-edit__form')
+const popupEdit = document.querySelector('.popup-edit');
+const popupEditOpenButton = document.querySelector('.profile__edit-button');
+const popupEditForm = popupEdit.querySelector('.popup-edit__form');
 
 
 function popupToggle(popup) {
-  popup.classList.toggle('popup_is-opened')
+  popup.classList.toggle('popup_is-opened');
 }
 
 function popupCleanFields(popup) {
@@ -16,15 +16,23 @@ function popupCleanFields(popup) {
   })
 }
 
+function popupOverlayListener(evt) {
+  const popup = document.querySelector('.popup_is-opened');
+  if (popup && evt.key == "Escape") {
+    popupClose(popup);
+  }
+}
+
 function popupClose(popup) {
-  popupToggle(popup)
-  popupCleanFields(popup)
+  document.removeEventListener('keydown', popupOverlayListener);
+  popupToggle(popup);
+  setTimeout(popupCleanFields, 200, popup);
 }
 
 function popupOpen(popup) {
-  const form = popup.querySelector('.popup__form')
+  const form = popup.querySelector('.popup__form');
   if (form) {
-    const fieldList = Array.from(popup.querySelectorAll('.popup__field'))
+    const fieldList = Array.from(popup.querySelectorAll('.popup__field'));
     const button = popup.querySelector('.popup__save-button');
     toggleButtonState(
       {
@@ -35,40 +43,35 @@ function popupOpen(popup) {
       button
     )
   }
-  popupToggle(popup)
+  document.addEventListener('keydown', popupOverlayListener);
+  popupToggle(popup);
+}
+
+function fillPopupEditFields() {
+  popupJob.value = profileJob.textContent;
+  popupName.value = profileName.textContent;
 }
 
 popupEditOpenButton.addEventListener('click', () => {
-  fillPopupEditFields()
-  popupOpen(popupEdit)
+  fillPopupEditFields();
+  popupOpen(popupEdit);
 })
 
-const profileName = document.querySelector('.profile__info-name')
-const profileJob = document.querySelector('.profile__info-job')
-const popupJob = popupEdit.querySelector('.popup__field[name="job"]')
-const popupName = popupEdit.querySelector('.popup__field[name="name"]')
+const profileName = document.querySelector('.profile__info-name');
+const profileJob = document.querySelector('.profile__info-job');
+const popupJob = popupEdit.querySelector('.popup__field[name="job"]');
+const popupName = popupEdit.querySelector('.popup__field[name="name"]');
 
 
-
-function fillPopupEditFields() {
-  popupJob.value = profileJob.textContent
-  popupName.value = profileName.textContent
-}
-
-popupEditForm.addEventListener('submit', (evt) => {
-  profileJob.textContent = popupJob.value
-  profileName.textContent = popupName.value
+popupEditForm.addEventListener('submit', () => {
+  profileJob.textContent = popupJob.value;
+  profileName.textContent = popupName.value;
   popupClose(popupEdit);
 })
 
 
-const setAllPopupEventListeners = () => {
-  popupList = Array.from(document.querySelectorAll('.popup'));
-  popupList.forEach(setPopupEventListeners)
-}
-
 const setPopupEventListeners = (popup) => {
-  const form = popup.querySelector('.popup__form')
+  const form = popup.querySelector('.popup__form');
   if (form) {
     form.addEventListener('submit', (evt) => {
       evt.preventDefault();
@@ -81,21 +84,18 @@ const setPopupEventListeners = (popup) => {
       popupClose(popup);
     }
   })
-  const popupCloseButton = popup.querySelector('.popup__close')
+  const popupCloseButton = popup.querySelector('.popup__close');
   popupCloseButton.addEventListener('click', () => {
-    popupClose(popup)
+    popupClose(popup);
   })
 }
 
-document.addEventListener('keydown', (evt) => {
-  const popup = document.querySelector('.popup_is-opened')
+const setAllPopupEventListeners = () => {
+  popupList = Array.from(document.querySelectorAll('.popup'));
+  popupList.forEach(setPopupEventListeners);
+}
 
-  if (popup && evt.key == "Escape") {
-    popupClose(popup);
-  }
-})
-
-setAllPopupEventListeners()
+setAllPopupEventListeners();
 
 
 //CARDS UI
@@ -103,7 +103,7 @@ setAllPopupEventListeners()
 // LIKE CARD
 
 function likeToggle(likeButton) {
-  likeButton.classList.toggle('elements__like-button_liked')
+  likeButton.classList.toggle('elements__like-button_liked');
 }
 
 
@@ -141,36 +141,36 @@ const cardsContainer = document.querySelector('.elements');
 // формирует #document-fragment секции .elements со всеми нужными полями
 // и листенарами
 function renderCard(card) {
-  const cardHTML = cardTemplate.cloneNode(true);
+  const cardElement = cardTemplate.cloneNode(true);
 
-  cardHTML.querySelector('.elements__title').textContent = card.name;
+  cardElement.querySelector('.elements__title').textContent = card.name;
 
-  const cardImg = cardHTML.querySelector('.elements__img');
+  const cardImg = cardElement.querySelector('.elements__img');
   cardImg.src = card.link;
   cardImg.alt = card.name;
   cardImg.addEventListener('click', () => {
-    popupOpenImg.querySelector('.popup-open-img__card-image').src = card.link
-    popupOpenImg.querySelector('.popup-open-img__title').textContent = card.name
-    popupOpen(popupOpenImg)
+    popupOpenImg.querySelector('.popup-open-img__card-image').src = card.link;
+    popupOpenImg.querySelector('.popup-open-img__title').textContent = card.name;
+    popupOpen(popupOpenImg);
   });
 
-  const likeButton = cardHTML.querySelector('.elements__like-button');
-  likeButton.addEventListener('click', (evt) => {
-    likeToggle(likeButton)
+  const likeButton = cardElement.querySelector('.elements__like-button');
+  likeButton.addEventListener('click', () => {
+    likeToggle(likeButton);
   });
 
-  const deleteButton = cardHTML.querySelector('.elements__delete-button');
+  const deleteButton = cardElement.querySelector('.elements__delete-button');
   deleteButton.addEventListener('click', (evt) => {
-    evt.target.parentElement.remove()
+    evt.target.parentElement.remove();
   })
 
-  return cardHTML
+  return cardElement;
 }
 
 function renderInitialCards() {
   cards.forEach((card) => {
-    const cardHTML = renderCard(card)
-    cardsContainer.append(cardHTML);
+    const cardElement = renderCard(card);
+    cardsContainer.append(cardElement);
   });
 
 }
@@ -185,7 +185,7 @@ const popupAddLink = popupAdd.querySelector('.popup-add__field[name="link"]');
 popupAddOpenButton.addEventListener('click', () => { popupOpen(popupAdd) });
 
 const popupAddForm = popupAdd.querySelector('.popup-add__form');
-popupAddForm.addEventListener('submit', (evt) => {
+popupAddForm.addEventListener('submit', () => {
   const card = {
     name: popupAddTitle.value,
     link: popupAddLink.value
@@ -194,12 +194,9 @@ popupAddForm.addEventListener('submit', (evt) => {
     alert('Заполните поля "название" и "ссылка" у карточки');
     return false;
   }
-
-  const cardHTML = renderCard(card);
-
-  cardsContainer.prepend(cardHTML);
-
-  popupClose(popupAdd)
+  const cardElement = renderCard(card);
+  cardsContainer.prepend(cardElement);
+  popupClose(popupAdd);
 });
 
 //OPEN CARD IMG

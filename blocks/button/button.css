@@ -11,6 +11,6 @@
   cursor: pointer;
 }
 
-button:focus {
+.button:focus {
   outline: none;
 }
