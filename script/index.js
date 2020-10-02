@@ -1,5 +1,6 @@
+const fadeEffectTimeOut = 2;
 //POPUP EDIT
-
+const popupList = Array.from(document.querySelectorAll('.popup'));
 const popupEdit = document.querySelector('.popup-edit');
 const popupEditOpenButton = document.querySelector('.profile__edit-button');
 const popupEditForm = popupEdit.querySelector('.popup-edit__form');
@@ -23,10 +24,19 @@ function popupOverlayListener(evt) {
   }
 }
 
+function addCssFadeEffect(element, num) {
+  element.style.transition = `visibility .${num}s,opacity .${num*2}s ease-in-out`;
+}
+
+popupList.forEach((popup) => {
+  addCssFadeEffect(popup, fadeEffectTimeOut);
+});
+
+
 function popupClose(popup) {
   document.removeEventListener('keydown', popupOverlayListener);
   popupToggle(popup);
-  setTimeout(popupCleanFields, 200, popup);
+  setTimeout(popupCleanFields, fadeEffectTimeOut*100, popup);
 }
 
 function popupOpen(popup) {
@@ -55,7 +65,8 @@ function fillPopupEditFields() {
 popupEditOpenButton.addEventListener('click', () => {
   fillPopupEditFields();
   popupOpen(popupEdit);
-})
+});
+
 
 const profileName = document.querySelector('.profile__info-name');
 const profileJob = document.querySelector('.profile__info-job');
@@ -67,7 +78,7 @@ popupEditForm.addEventListener('submit', () => {
   profileJob.textContent = popupJob.value;
   profileName.textContent = popupName.value;
   popupClose(popupEdit);
-})
+});
 
 
 const setPopupEventListeners = (popup) => {
@@ -83,15 +94,14 @@ const setPopupEventListeners = (popup) => {
       // клик был совершен по оверлею, а не по его дочерним элементам
       popupClose(popup);
     }
-  })
+  });
   const popupCloseButton = popup.querySelector('.popup__close');
   popupCloseButton.addEventListener('click', () => {
     popupClose(popup);
-  })
+  });
 }
 
 const setAllPopupEventListeners = () => {
-  popupList = Array.from(document.querySelectorAll('.popup'));
   popupList.forEach(setPopupEventListeners);
 }
 
@@ -162,7 +172,7 @@ function renderCard(card) {
   const deleteButton = cardElement.querySelector('.elements__delete-button');
   deleteButton.addEventListener('click', (evt) => {
     evt.target.parentElement.remove();
-  })
+  });
 
   return cardElement;
 }

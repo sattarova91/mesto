@@ -1,7 +1,7 @@
 const hasInvalidField = (fieldList) => {
   return fieldList.some((field) => {
     return !field.validity.valid;
-  })
+  });
 };
 
 const toggleButtonState = (selectors, fieldList, button) => {
@@ -42,8 +42,8 @@ const enableFormValidation = (selectors, form) => {
     field.addEventListener('input', () => {
       processValidity(selectors, form, field);
       toggleButtonState(selectors, fieldList, button);
-    })
-  })
+    });
+  });
 }
 
 function enableValidation(selectors) {
