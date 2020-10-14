@@ -1,4 +1,5 @@
 import {Card} from './card.js';
+import {formValidatorSelectors, FormValidator} from './formValidator.js';
 
 const fadeEffectTimeOut = 2;
 const popupList = Array.from(document.querySelectorAll('.popup'));
@@ -106,8 +107,6 @@ setAllPopupEventListeners();
 
 //CARDS UI
 
-// LIKE CARD
-
 function toggleCssClass(element, cssClass) {
   element.classList.toggle(cssClass);
 }
@@ -174,10 +173,11 @@ popupAddForm.addEventListener('submit', () => {
   popupClose(popupAdd);
 });
 
-//OPEN CARD IMG
+// EnableFormValidation
 
+const formList = Array.from(document.querySelectorAll('.popup__form'));
+formList.forEach((form) => {
+  const validator = new FormValidator(formValidatorSelectors, form);
+  validator.enableValidation();
+});
 
-
-// Everything else
-
-/* renderInitialCards(); */
