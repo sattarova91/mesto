@@ -23,12 +23,19 @@ class FormValidator {
 
   _handleFieldInput(evt) {
     this._processValidity(evt.target);
-    this.toggleButtonState();
+    this._toggleButtonState();
   };
 
   enableValidation() {
     this._setEventListeners();
   };
+
+  validate() {
+    this._fieldList.forEach((field) => {
+      this._processValidity(field);
+    });
+    this._toggleButtonState();
+  }
 
   _processValidity(field) {
     if (field.validity.valid) {
@@ -50,7 +57,7 @@ class FormValidator {
     errorElement.textContent = "";
   };
 
-  toggleButtonState () {
+  _toggleButtonState () {
     if (this._hasInvalidField()) {
       this._button.setAttribute('disabled', true);
       this._button.classList.add(this._selectors.inactiveButtonClass);

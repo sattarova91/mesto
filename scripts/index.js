@@ -47,7 +47,7 @@ function popupOpen(popup) {
   const form = popup.querySelector('.popup__form');
   if (form) {
     const validator = new FormValidator(formValidatorSelectors, form);
-    validator.toggleButtonState();
+    validator.validate();
   }
   document.addEventListener('keydown', popupOverlayListener);
   popupToggle(popup);
