@@ -1,9 +1,13 @@
+/* import Card form './card.js'; */
+
 const fadeEffectTimeOut = 2;
 //POPUP EDIT
 const popupList = Array.from(document.querySelectorAll('.popup'));
 const popupEdit = document.querySelector('.popup-edit');
 const popupEditOpenButton = document.querySelector('.profile__edit-button');
 const popupEditForm = popupEdit.querySelector('.popup-edit__form');
+const cardsContainer = document.querySelector('.elements');
+
 
 
 function popupToggle(popup) {
@@ -42,16 +46,8 @@ function popupClose(popup) {
 function popupOpen(popup) {
   const form = popup.querySelector('.popup__form');
   if (form) {
-    const fieldList = Array.from(popup.querySelectorAll('.popup__field'));
-    const button = popup.querySelector('.popup__save-button');
-    toggleButtonState(
-      {
-        submitButtonSelector: '.popup__save-button',
-        inactiveButtonClass: 'popup__save-button_disabled'
-      },
-      fieldList,
-      button
-    )
+    const validator = new FormValidator(formValidatorSelectors, form);
+    validator.toggleButtonState();
   }
   document.addEventListener('keydown', popupOverlayListener);
   popupToggle(popup);
@@ -112,8 +108,8 @@ setAllPopupEventListeners();
 
 // LIKE CARD
 
-function likeToggle(likeButton) {
-  likeButton.classList.toggle('elements__like-button_liked');
+function toggleCssClass(element, cssClass) {
+  element.classList.toggle(cssClass);
 }
 
 
@@ -139,14 +135,75 @@ const cards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
   },
   {
-    name: 'Байкал',
+    name: 'Байкaл',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
 
+class Card {
+  constructor(cardData, cardSelector) {
+    this._name = cardData.name;
+    this._link = cardData.link;
+    this._cardSelector = cardSelector;
+  }
 
+  _getTemplate() {
+    const cardElement = document
+      .querySelector(this._cardSelector)
+      .content
+      .cloneNode(true);
+    return cardElement;
+  }
+
+  generateCard() {
+    this._element = this._getTemplate();
+    this._element.querySelector('.elements__title').textContent = this._name;
+    this._element.querySelector('.elements__img').src = this._link;
+    this._element.querySelector('.elements__img').alt = this._name;
+
+    this._likeButton = this._element.querySelector('.elements__like-button');
+    this._deleteButton = this._element.querySelector('.elements__delete-button');
+    this._cardImg = this._element.querySelector('.elements__img');
+
+    this._setEventListeners();
+
+    return this._element;
+  }
+
+  _setEventListeners() {
+    this._likeButton.addEventListener('click', this._handleLikeClick);
+    this._deleteButton.addEventListener('click', this._handleDeleteClick);
+    this._cardImg.addEventListener('click', () => {
+      this._handleImgClick();
+    });
+  }
+
+  _handleLikeClick(evt) {
+    toggleCssClass(evt.target, 'elements__like-button_liked');
+  }
+
+  _handleDeleteClick(evt) {
+    evt.target.parentElement.remove();
+  }
+
+  _handleImgClick() {
+    popupOpenImg.querySelector('.popup-open-img__card-image').src = this._link;
+    popupOpenImg.querySelector('.popup-open-img__title').textContent = this._name;
+    popupOpen(popupOpenImg);
+  }
+}
+
+cards.forEach((cardData) => {
+  const card = new Card(cardData, '.card__template');
+  const cardElement = card.generateCard();
+  cardsContainer.append(cardElement);
+
+})
+
+
+
+/*
 const cardTemplate = document.querySelector('#cards').content;
-const cardsContainer = document.querySelector('.elements');
 
 // формирует #document-fragment секции .elements со всеми нужными полями
 // и листенарами
@@ -166,7 +223,7 @@ function renderCard(card) {
 
   const likeButton = cardElement.querySelector('.elements__like-button');
   likeButton.addEventListener('click', () => {
-    likeToggle(likeButton);
+    toggleCssClass(likeButton, 'elements__like-button_liked');
   });
 
   const deleteButton = cardElement.querySelector('.elements__delete-button');
@@ -184,7 +241,7 @@ function renderInitialCards() {
   });
 
 }
-
+ */
 //POPUP ADD CARD
 
 const popupAdd = document.querySelector('.popup-add');
@@ -196,16 +253,19 @@ popupAddOpenButton.addEventListener('click', () => { popupOpen(popupAdd) });
 
 const popupAddForm = popupAdd.querySelector('.popup-add__form');
 popupAddForm.addEventListener('submit', () => {
-  const card = {
+  const cardData = {
     name: popupAddTitle.value,
     link: popupAddLink.value
   };
-  if (!card.name || !card.link) {
+  if (!cardData.name || !cardData.link) {
     alert('Заполните поля "название" и "ссылка" у карточки');
     return false;
   }
-  const cardElement = renderCard(card);
+
+  const card = new Card(cardData, '.card__template');
+  const cardElement = card.generateCard();
   cardsContainer.prepend(cardElement);
+
   popupClose(popupAdd);
 });
 
@@ -216,4 +276,4 @@ const popupOpenImgTitle = popupOpenImg.querySelector('.popup-open-img__title');
 
 // Everything else
 
-renderInitialCards();
+/* renderInitialCards(); */
