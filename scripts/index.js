@@ -1,58 +1,30 @@
 import {Card} from './card.js';
-import {formValidatorSelectors, FormValidator} from './formValidator.js';
+import {cards, formValidatorSelectors} from './constants.js';
+import {FormValidator} from './formValidator.js';
+import {popupList, popupOpenImg, popupOpen, popupClose} from './utils.js';
 
-const fadeEffectTimeOut = 2;
-const popupList = Array.from(document.querySelectorAll('.popup'));
-const popupEdit = document.querySelector('.popup-edit');
-const popupEditOpenButton = document.querySelector('.profile__edit-button');
-const popupEditForm = popupEdit.querySelector('.popup-edit__form');
 const cardsContainer = document.querySelector('.elements');
 
-export const popupOpenImg = document.querySelector('.popup-open-img');
 
 
-function popupToggle(popup) {
-  popup.classList.toggle('popup_is-opened');
-}
+///////////////////  POPUP EDIT ////////////////////////////////
+const popupEdit = document.querySelector('.popup-edit');
 
-function popupCleanFields(popup) {
-  const fieldList = Array.from(popup.querySelectorAll('.popup__field'));
-  fieldList.forEach((field) => {
-    field.value = '';
-  })
-}
+const popupEditForm = popupEdit.querySelector('.popup-edit__form');
+const popupEditValidator = new FormValidator(formValidatorSelectors, popupEditForm);
+popupEditValidator.enableValidation();
 
-function popupOverlayListener(evt) {
-  const popup = document.querySelector('.popup_is-opened');
-  if (popup && evt.key == "Escape") {
-    popupClose(popup);
-  }
-}
+const popupEditOpenButton = document.querySelector('.profile__edit-button');
+const profileName = document.querySelector('.profile__info-name');
+const profileJob = document.querySelector('.profile__info-job');
+const popupJob = popupEdit.querySelector('.popup__field[name="job"]');
+const popupName = popupEdit.querySelector('.popup__field[name="name"]');
 
-function addCssFadeEffect(element, num) {
-  element.style.transition = `visibility .${num}s,opacity .${num*2}s ease-in-out`;
-}
-
-popupList.forEach((popup) => {
-  addCssFadeEffect(popup, fadeEffectTimeOut);
+popupEditForm.addEventListener('submit', () => {
+  profileJob.textContent = popupJob.value;
+  profileName.textContent = popupName.value;
+  popupClose(popupEdit);
 });
-
-
-function popupClose(popup) {
-  document.removeEventListener('keydown', popupOverlayListener);
-  popupToggle(popup);
-  setTimeout(popupCleanFields, fadeEffectTimeOut*100, popup);
-}
-
-export function popupOpen(popup) {
-  const form = popup.querySelector('.popup__form');
-  if (form) {
-    const validator = new FormValidator(formValidatorSelectors, form);
-    validator.validate();
-  }
-  document.addEventListener('keydown', popupOverlayListener);
-  popupToggle(popup);
-}
 
 function fillPopupEditFields() {
   popupJob.value = profileJob.textContent;
@@ -61,22 +33,10 @@ function fillPopupEditFields() {
 
 popupEditOpenButton.addEventListener('click', () => {
   fillPopupEditFields();
+  popupEditValidator.validate();
   popupOpen(popupEdit);
 });
-
-
-const profileName = document.querySelector('.profile__info-name');
-const profileJob = document.querySelector('.profile__info-job');
-const popupJob = popupEdit.querySelector('.popup__field[name="job"]');
-const popupName = popupEdit.querySelector('.popup__field[name="name"]');
-
-
-popupEditForm.addEventListener('submit', () => {
-  profileJob.textContent = popupJob.value;
-  profileName.textContent = popupName.value;
-  popupClose(popupEdit);
-});
-
+////////////////////////////////////////////////////////////////
 
 const setPopupEventListeners = (popup) => {
   const form = popup.querySelector('.popup__form');
@@ -111,34 +71,6 @@ function toggleCssClass(element, cssClass) {
   element.classList.toggle(cssClass);
 }
 
-
-const cards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкaл',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 cards.forEach((cardData) => {
   const card = new Card(cardData, '.card__template');
   const cardElement = card.generateCard();
@@ -146,25 +78,27 @@ cards.forEach((cardData) => {
 
 });
 
-//POPUP ADD CARD
-
+///////////////////  POPUP ADD /////////////////////////////////
 const popupAdd = document.querySelector('.popup-add');
+
+const popupAddForm = popupAdd.querySelector('.popup-add__form');
+const popupAddValidator = new FormValidator(formValidatorSelectors, popupAddForm);
+popupAddValidator.enableValidation();
+
 const popupAddOpenButton = document.querySelector('.profile__add-button');
 const popupAddTitle = popupAdd.querySelector('.popup-add__field[name="title"]');
 const popupAddLink = popupAdd.querySelector('.popup-add__field[name="link"]');
 
-popupAddOpenButton.addEventListener('click', () => { popupOpen(popupAdd) });
+popupAddOpenButton.addEventListener('click', () => {
+  popupAddValidator.validate();
+  popupOpen(popupAdd);
+});
 
-const popupAddForm = popupAdd.querySelector('.popup-add__form');
 popupAddForm.addEventListener('submit', () => {
   const cardData = {
     name: popupAddTitle.value,
     link: popupAddLink.value
   };
-  if (!cardData.name || !cardData.link) {
-    alert('Заполните поля "название" и "ссылка" у карточки');
-    return false;
-  }
 
   const card = new Card(cardData, '.card__template');
   const cardElement = card.generateCard();
@@ -173,11 +107,6 @@ popupAddForm.addEventListener('submit', () => {
   popupClose(popupAdd);
 });
 
-// EnableFormValidation
 
-const formList = Array.from(document.querySelectorAll('.popup__form'));
-formList.forEach((form) => {
-  const validator = new FormValidator(formValidatorSelectors, form);
-  validator.enableValidation();
-});
+////////////////////////////////////////////////////////////////
 

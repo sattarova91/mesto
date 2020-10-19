@@ -1,11 +1,3 @@
-export const formValidatorSelectors = {
-  inputSelector: '.popup__field',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_disabled',
-  inputErrorClass: 'popup__field-error_active'
-};
-
-
 export class FormValidator {
   constructor(selectors, form) {
     this._selectors = selectors;

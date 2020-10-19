@@ -1,4 +1,4 @@
-import {popupOpenImg, popupOpen} from './index.js';
+import {popupOpenImg, popupOpen} from './utils.js';
 
 export class Card {
   constructor(cardData, cardSelector) {
@@ -32,18 +32,21 @@ export class Card {
 
   _setEventListeners() {
     this._likeButton.addEventListener('click', this._handleLikeClick);
-    this._deleteButton.addEventListener('click', this._handleDeleteClick);
+    this._deleteButton.addEventListener('click', (evt) => {
+      this._handleDeleteClick(evt);
+    });
     this._cardImg.addEventListener('click', () => {
       this._handleImgClick();
     });
   }
 
   _handleLikeClick(evt) {
-    toggleCssClass(evt.target, 'elements__like-button_liked');
+    evt.target.classList.toggle('elements__like-button_liked');
   }
 
   _handleDeleteClick(evt) {
     evt.target.parentElement.remove();
+    this._element = null;
   }
 
   _handleImgClick() {
