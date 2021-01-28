@@ -1,6 +1,6 @@
-import {Card} from './card.js';
-import {enableValidation, toggleButtonState} from './validate.js';
-import {Popup} from './popup.js';
+import {Card} from './Card.js';
+import {Popup} from './Popup.js';
+import {FormValidator} from './FormValidator.js';
 
 const selectors = {
   formSelector: '.popup__form',
@@ -11,8 +11,10 @@ const selectors = {
   errorClass: 'popup__field-error_active'
 };
 
-enableValidation(selectors);
 ////////////////////////////////////////////
+const editFormValidator = new FormValidator(selectors, document.querySelector('.popup-edit'));
+editFormValidator.enableValidation();
+
 class EditPopup extends Popup {
   constructor(popupSelector, titleSelector, JobSelector) {
     super(popupSelector);
@@ -37,6 +39,7 @@ class EditPopup extends Popup {
   open() {
     this._element.querySelector('#name-field').value = this._titleElement.textContent;
     this._element.querySelector('#job-field').value = this._jobElement.textContent;
+    editFormValidator.validate();
     super.open();
   }
 }
@@ -49,6 +52,10 @@ popupEditOpenButton.addEventListener('click', function() {
 });
 
 ////////////////////////////////////////////
+const addFormValidator = new FormValidator(selectors, document.querySelector('.popup-add'));
+addFormValidator.enableValidation();
+
+
 class AddPopup extends Popup {
   setEventListeners() {
     super.setEventListeners();
@@ -66,6 +73,14 @@ class AddPopup extends Popup {
     addCard(card);
     this.close();
   }
+
+  open() {
+    this._element.querySelector('#title-field').value = '';
+    this._element.querySelector('#link-field').value = '';
+    addFormValidator.validate();
+    super.open();
+  }
+
 }
 
 const popupAdd = new AddPopup('.popup-add');
