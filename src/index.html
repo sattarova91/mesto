@@ -5,17 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link rel="stylesheet" href="./pages/index.css">
   <meta name="author" content="Анастасия Чурикова">
 </head>
 
 <body class="page">
   <header class="header">
-    <img class="header__logo" src="./images/mesto-logo.svg" alt="логотип">
+    <img class="header__logo" src="<%=require('./images/mesto-logo.svg')%>" alt="логотип">
   </header>
   <main>
     <section class="profile">
-      <img class="profile__avatar" src="./images/profile-image.svg" alt="аватар">
+      <img class="profile__avatar" src="<%=require('./images/profile-image.svg')%>" alt="аватар">
       <div class="profile__info">
         <div class="profile__container">
           <h1 class="profile__info-name">Жак-Ив Кусто</h1>
@@ -77,16 +76,6 @@
       <button class="button popup__close popup-open-img__close" type="button"></button>
     </div>
   </div>
-  <script  src="./scripts/pages/index.js" type="module" defer></script>
-  <script src="./scripts/components/Card.js" type="module" defer></script>
-  <script src="./scripts/components/FormValidator.js" type="module" defer></script>
-  <script src="./scripts/components/Section.js" type="module" defer></script>
-  <script src="./scripts/components/UserInfo.js" type="module" defer></script>
-  <script src="./scripts/components/Popup.js" type="module" defer></script>
-  <script src="./scripts/components/PopupWithImage.js" type="module" defer></script>
-  <script src="./scripts/components/PopupWithForm.js" type="module" defer></script>
-  <script src="./scripts/components/EditPopup.js" type="module" defer></script>
-  <script src="./scripts/utils/constants.js" type="module" defer></script>
   <template class="card__template" id="cards">
     <li class="elements__item">
       <button class="button"><img class="elements__img"></button>
