@@ -6,7 +6,6 @@ export default class Popup {
     this.setEventListeners();
     //проблема с удалением листенера и потерей контекста
     this._handleEsc = this._handleEsc.bind(this);
-    this._element.style.transition = `visibility .${FADE_EFFECT_TIMEOUT}s,opacity .${FADE_EFFECT_TIMEOUT*2}s ease-in-out`;
   }
 
   setEventListeners() {
@@ -36,13 +35,13 @@ export default class Popup {
 
   open() {
     document.addEventListener('keydown', this._handleEsc);
-    this._element.classList.toggle('popup_is-opened');
+    this._element.classList.add('popup_is-opened');
   }
 
   close() {
     document.removeEventListener('keydown', this._handleEsc);
 
-    this._element.classList.toggle('popup_is-opened');
+    this._element.classList.remove('popup_is-opened');
   }
 }
 
