@@ -1,3 +1,5 @@
+import {CURRENT_USER} from '../utils/constants.js';
+
 export default class Card {
   constructor(data, cardSelector, handleCardClick) {
     this._data = data;
@@ -27,26 +29,60 @@ export default class Card {
     });
   }
 
+  ////////////////////////////
   handleDeleteClick() {
     this._element.remove();
   }
 
   handeLikeClick() {
-    this.like();
+    if(this.isOwnLiked()) {
+      this.unlike();
+    } else {
+      this.like();
+    }
   }
+  ////////////////////////////
 
   like() {
     this._likeButton.classList.toggle('elements__like-button_liked');
   }
 
+  unlike() {
+    const likePos = this._data.likes.findIndex((like) => {
+      return like._id == CURRENT_USER.getUserInfo()._id;
+    });
+    this._data.likes.splice(likePos, 1);
+  }
+
+  isOwnLiked() {
+    return this._data.likes.some((like) => {
+      return like._id == CURRENT_USER.getUserInfo()._id;
+    });
+  }
+
+  isOwnCard() {
+
+  }
+
   generateCard() {
     this._element = this._getTemplate();
-    this._element.querySelector('.elements__title').textContent = this._data.name;
+    this._title = this._element.querySelector('.elements__title');
     this._likeButton = this._element.querySelector('.elements__like-button');
+    this._likeCounter = this._element.querySelector('.elements__like-counter');
     this._cardImage = this._element.querySelector('.elements__img');
-    this._cardImage.alt = this._data.name;
-    this._cardImage.src = this._data.link;
+    this.updateData(this._data);
     this._setEventListeners();
     return this._element;
+  }
+
+  updateData(newData) {
+    this._data = newData;
+    this._cardImage.alt = this._data.name;
+    this._cardImage.src = this._data.link;
+    this._title.textContent = this._data.name;
+    this._likeCounter.textContent = this._data.likes.length;
+    if(this.isOwnLiked()) {
+      this.like();
+    }
   }
 }

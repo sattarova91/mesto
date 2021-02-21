@@ -14,7 +14,10 @@
   </header>
   <main>
     <section class="profile">
-      <img class="profile__avatar" src="<%=require('./images/profile-image.svg')%>" alt="аватар">
+      <div class="profile__avatar-overlay">
+        <img class="profile__avatar" src="<%=require('./images/profile-image.svg')%>" alt="аватар">
+        <button class="profile__avatar-edit-button"></button>
+      </div>
       <div class="profile__info">
         <div class="profile__container">
           <h1 class="profile__info-name"></h1>
@@ -71,14 +74,14 @@
   </div>
   <div class="popup popup-update-avatar">
     <form class="popup__form popup-update-avatar__form" name="popup-update-avatar__form" method="POST" action="#" novalidate>
-      <div class="popup__container popup-update-avatar__container">
+      <div class="popup__container">
         <button class="button popup__close" type="button"></button>
-        <h2 class="popup__title ">Обновить аватар</h2>
+        <h2 class="popup__title">Обновить аватар</h2>
         <label class="popup__field-container">
-          <input id="avatar-url-field" class="popup__field popup-update-avatar__field" type="url" placeholder="Ссылка на аватар" name="avatar" required>
+          <input id="avatar-url-field" class="popup__field" type="url" placeholder="Ссылка на аватар" name="avatar" required>
           <span id="avatar-url-field-error" class="popup__field-error"></span>
         </label>
-        <button class="button popup__save-button" type="submit">Сохранить</button>
+        <button class="button popup__save-button popup-update-avatar__save-button" type="submit">Сохранить</button>
       </div>
     </form>
   </div>
@@ -92,7 +95,7 @@
   <div class="popup  popup-confirm-card">
     <div class="popup__container popup-confirm-card__container">
       <button class="button popup__close" type="button"></button>
-      <h2 class="popup-confirm-card__title">Вы уверены?</h2>
+      <h2 class="popup__title">Вы уверены?</h2>
       <button class="button popup__save-button">Да</button>
     </div>
   </div>
@@ -103,7 +106,7 @@
         <h2 class="elements__title"></h2>
         <div class="elements__like-info">
           <button class="button elements__like-button"></button>
-          <span class="elements__like-counter">8</span>
+          <span class="elements__like-counter"></span>
         </div>
       </div>
       <button class="button elements__delete-button elements__delete-button_hidden"></button>

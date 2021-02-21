@@ -22,6 +22,12 @@ export default class ApiUserInfo extends UserInfo {
   }
 
   updateUserAvatar(avatar) {
-    
+    API.updateCurrentUserAvatar(avatar).then((data) => {
+      this._data = data;
+      super.setUserInfo(this._data);
+    });
   }
+
+
+
 }

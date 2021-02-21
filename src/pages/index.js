@@ -9,11 +9,30 @@ import {
   validatorSelectors,
   popupAddOpenButton,
   popupEditOpenButton,
+  popupUpdateAvatarButton,
   API,
   CURRENT_USER
 } from '../scripts/utils/constants.js';
 
 
+//////////////////////////////////////////
+const updateAvatarFormValidator = new FormValidator(validatorSelectors, document.querySelector('.popup-update-avatar'));
+updateAvatarFormValidator.enableValidation();
+
+const popupUpdateAvatar = new PopupWithForm(
+  '.popup-update-avatar',
+  { validate: () => {
+      updateAvatarFormValidator.validate();
+    },
+    submit: (inputValues) => {
+      CURRENT_USER.updateUserAvatar(inputValues.avatar);
+    }
+ }
+);
+
+popupUpdateAvatarButton.addEventListener('click', function() {
+  popupUpdateAvatar.open();
+});
 //////////////////////////////////////////
 const editFormValidator = new FormValidator(validatorSelectors, document.querySelector('.popup-edit'));
 editFormValidator.enableValidation();

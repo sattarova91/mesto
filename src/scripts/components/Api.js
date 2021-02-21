@@ -14,7 +14,7 @@ export default class Api {
   }
 
   updateCurrentUserAvatar(avatar) {
-    return this._patch('users/me/avatar', avatar);
+    return this._patch('users/me/avatar', {avatar: avatar});
   }
 
   //////////// cardAPI
