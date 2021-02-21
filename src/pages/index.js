@@ -1,8 +1,9 @@
 import '../pages/index.css';
-import Card from '../scripts/components/Card.js';
+import {API} from '../scripts/components/Api.js';
+import ApiCard from '../scripts/components/ApiCard.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
-import UserInfo from '../scripts/components/UserInfo.js';
+import ApiUserInfo from '../scripts/components/ApiUserInfo.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import EditPopup from '../scripts/components/EditPopup.js';
 import Section from '../scripts/components/Section.js';
@@ -10,18 +11,18 @@ import {
   validatorSelectors,
   initialCards,
   popupAddOpenButton,
-  popupEditOpenButton,
-  FADE_EFFECT_TIMEOUT
+  popupEditOpenButton
 } from '../scripts/utils/constants.js';
 
-//////////////////////////////////////////
 
+//////////////////////////////////////////
 const editFormValidator = new FormValidator(validatorSelectors, document.querySelector('.popup-edit'));
 editFormValidator.enableValidation();
 
-const user = new UserInfo({
+const user = new ApiUserInfo({
   nameSelector: '.profile__info-name',
-  infoSelector: '.profile__info-job'
+  infoSelector: '.profile__info-job',
+  avatarSelector: '.profile__avatar'
 });
 
 const popupEdit = new EditPopup(
@@ -53,7 +54,9 @@ const popupAdd = new PopupWithForm(
         name : inputValues.title,
         link : inputValues.link
       };
-      addCard(card);
+      API.addCard(card).then((apiCard) => {
+        renderCard(apiCard);
+      });
     },
     validate: () => {
       addFormValidator.validate();
@@ -70,15 +73,17 @@ popupAddOpenButton.addEventListener('click', function() {
 const popupOpenImg = new PopupWithImage('.popup-open-img');
 
 const cardsSection = new Section({
-  items: initialCards,
-  renderer: addCard
+  items: [],
+  renderer: renderCard
 }, '.elements');
 
-function addCard(card) {
-  const c = new Card(card, '.card__template', () => {
+function renderCard(card) {
+  const c = new ApiCard(card, '.card__template', () => {
     popupOpenImg.open(card.name, card.link);
   });
   cardsSection.addItem(c.generateCard());
 }
 
-cardsSection.renderItems();
+API.getInitialCards().then((apiCards) => {
+  apiCards.reverse().forEach(renderCard);
+});

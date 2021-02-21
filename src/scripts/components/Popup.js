@@ -1,5 +1,3 @@
-import {FADE_EFFECT_TIMEOUT} from '../utils/constants.js';
-
 export default class Popup {
   constructor(popupSelector) {
     this._element = document.querySelector(popupSelector);
@@ -44,4 +42,3 @@ export default class Popup {
     this._element.classList.remove('popup_is-opened');
   }
 }
-
