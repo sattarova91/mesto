@@ -1,3 +1,6 @@
+import ApiUserInfo from '../components/ApiUserInfo.js';
+import Api from '../components/Api.js';
+
 const validatorSelectors = {
   formSelector: '.popup__form',
   inputSelector: '.popup__field',
@@ -7,41 +10,31 @@ const validatorSelectors = {
   errorClass: 'popup__field-error_active'
 };
 
-const initialCards = [
-  {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const popupAddOpenButton = document.querySelector('.profile__add-button');
 const popupEditOpenButton = document.querySelector('.profile__edit-button');
 const FADE_EFFECT_TIMEOUT = 2;
 
+const API = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-20',
+  headers: {
+    authorization: 'bde13069-7cbc-4063-9ad5-2d5660d9e188',
+    'Content-Type': 'application/json'
+  }
+});
+
+const CURRENT_USER = new ApiUserInfo({
+  nameSelector: '.profile__info-name',
+  aboutSelector: '.profile__info-job',
+  avatarSelector: '.profile__avatar'
+});
+
+
+
 export {
   validatorSelectors,
-  initialCards,
   popupAddOpenButton,
   popupEditOpenButton,
-  FADE_EFFECT_TIMEOUT
+  FADE_EFFECT_TIMEOUT,
+  CURRENT_USER,
+  API
 };
