@@ -69,6 +69,19 @@
       </div>
     </form>
   </div>
+  <div class="popup popup-update-avatar">
+    <form class="popup__form popup-update-avatar__form" name="popup-update-avatar__form" method="POST" action="#" novalidate>
+      <div class="popup__container popup-update-avatar__container">
+        <button class="button popup__close" type="button"></button>
+        <h2 class="popup__title ">Обновить аватар</h2>
+        <label class="popup__field-container">
+          <input id="avatar-url-field" class="popup__field popup-update-avatar__field" type="url" placeholder="Ссылка на аватар" name="avatar" required>
+          <span id="avatar-url-field-error" class="popup__field-error"></span>
+        </label>
+        <button class="button popup__save-button" type="submit">Сохранить</button>
+      </div>
+    </form>
+  </div>
   <div class="popup popup-open-img">
     <div class="popup-open-img__container">
       <img class="popup-open-img__card-image">
@@ -76,14 +89,24 @@
       <button class="button popup__close popup-open-img__close" type="button"></button>
     </div>
   </div>
+  <div class="popup  popup-confirm-card">
+    <div class="popup__container popup-confirm-card__container">
+      <button class="button popup__close" type="button"></button>
+      <h2 class="popup-confirm-card__title">Вы уверены?</h2>
+      <button class="button popup__save-button">Да</button>
+    </div>
+  </div>
   <template class="card__template" id="cards">
     <li class="elements__item">
       <button class="button"><img class="elements__img"></button>
       <div class="elements__card-info">
         <h2 class="elements__title"></h2>
-        <button class="button elements__like-button"></button>
+        <div class="elements__like-info">
+          <button class="button elements__like-button"></button>
+          <span class="elements__like-counter">8</span>
+        </div>
       </div>
-      <button class="button elements__delete-button"></button>
+      <button class="button elements__delete-button elements__delete-button_hidden"></button>
     </li>
   </template>
 </body>
