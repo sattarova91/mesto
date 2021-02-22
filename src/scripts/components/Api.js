@@ -67,7 +67,13 @@ export default class Api {
       headers: this._headers,
       'Content-Type': 'application/json',
       body: JSON.stringify(data)
-    }).then(res => {return res.json();}).catch((err) => {
+    }).then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Ошибка: ${res.status}`);
+    }).catch((err) => {
       console.log(err);
     });
   }
