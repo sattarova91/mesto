@@ -42,49 +42,36 @@ export default class Api {
   ////////////
 
   _patch(url, data) {
-    return fetch(`${this._baseUrl}/${url}`, {
-      method: 'PATCH',
-      headers: this._headers,
-      'Content-Type': 'application/json',
-      body: JSON.stringify(data)
-    }).then(res => {return res.json();});
+    return this._fetch('PATCH', url, data);
   }
 
   _get(url) {
-    return fetch(`${this._baseUrl}/${url}`, {
-      method: 'GET',
-      headers: this._headers
-    }).then(res => {return res.json();});
+    return this._fetch('GET', url);
   }
 
   _post(url, data) {
-    return fetch(`${this._baseUrl}/${url}`, {
-      method: 'POST',
-      headers: this._headers,
-      'Content-Type': 'application/json',
-      body: JSON.stringify(data)
-    }).then(res => {return res.json();});
+    return this._fetch('POST', url, data);
   }
 
   _delete(url) {
-    return fetch(`${this._baseUrl}/${url}`, {
-      method: 'DELETE',
-      headers: this._headers
-    });
+    return this._fetch('DELETE', url);
   }
 
   _put(url, data) {
+    return this._fetch('PUT', url, data);
+  }
+
+  _fetch(method, url, data = undefined) {
     return fetch(`${this._baseUrl}/${url}`, {
-      method: 'PUT',
+      method: method,
       headers: this._headers,
       'Content-Type': 'application/json',
       body: JSON.stringify(data)
-    }).then(res => {return res.json();});
+    }).then(res => {return res.json();}).catch((err) => {
+      console.log(err);
+    });
   }
-
-
 }
-// return Promise.reject(`Ошибка: ${res.status}`);
 
 
 

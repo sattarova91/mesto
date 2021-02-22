@@ -1,6 +1,7 @@
 import '../pages/index.css';
 import ApiCard from '../scripts/components/ApiCard.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import PopupWithConfirm from '../scripts/components/PopupWithConfirm.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import EditPopup from '../scripts/components/EditPopup.js';
@@ -14,6 +15,7 @@ import {
   CURRENT_USER
 } from '../scripts/utils/constants.js';
 
+//////////////////////////////////////////
 
 //////////////////////////////////////////
 const updateAvatarFormValidator = new FormValidator(validatorSelectors, document.querySelector('.popup-update-avatar'));
@@ -86,15 +88,31 @@ popupAddOpenButton.addEventListener('click', function() {
 
 const popupOpenImg = new PopupWithImage('.popup-open-img');
 
+const popupConfirmCard = new PopupWithConfirm(
+  '.popup-confirm-card',
+  { confirm: (card) => {
+      card.delete();
+    }
+  }
+);
+
+
 const cardsSection = new Section({
   items: [],
   renderer: renderCard
 }, '.elements');
 
 function renderCard(card) {
-  const c = new ApiCard(card, '.card__template', () => {
-    popupOpenImg.open(card.name, card.link);
-  });
+  const c = new ApiCard(
+    card, '.card__template', {
+      handleCardClick: (name, link) => {
+        popupOpenImg.open(name, link);
+      },
+      handleDeleteClick: () => {
+        popupConfirmCard.open(c);
+      }
+    }
+  );
   cardsSection.addItem(c.generateCard());
 }
 
