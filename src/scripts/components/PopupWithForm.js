@@ -6,6 +6,18 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this._submitCallback = callbacks.submit;
     this._validateCallback = callbacks.validate;
+
+    this._saveButton = this._element.querySelector('.popup__save-button');
+  }
+
+  lock() {
+    this._saveButtonText = this._saveButton.innerText;
+    this._saveButton.innerText = 'Сохранение...';
+  }
+
+  unlock() {
+    this._saveButton.innerText = this._saveButtonText;
+    this._saveButtonText = undefined;
   }
 
   setEventListeners() {
