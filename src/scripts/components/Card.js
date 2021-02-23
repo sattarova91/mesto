@@ -1,7 +1,6 @@
-import {CURRENT_USER} from '../utils/constants.js';
-
 export default class Card {
-  constructor(data, cardSelector, listeners) {
+  constructor(currentUserId, data, cardSelector, listeners) {
+    this._currentUserId = currentUserId;
     this._data = data;
     this._cardSelector = cardSelector;
     this._listeners = listeners;
@@ -22,7 +21,7 @@ export default class Card {
       this._listeners.handleDeleteClick();
     });
     this._likeButton.addEventListener('click', () => {
-      this.handeLikeClick();
+      this._listeners.handeLikeClick();
     });
     this._cardImage.addEventListener('click', () => {
       this._listeners.handleCardClick(this._data.name, this._data.link);
@@ -39,19 +38,13 @@ export default class Card {
 
   ////////////////////////////
 
-  handeLikeClick() {
-    this._toggleLike();
-  }
-
-  ////////////////////////////
-
   delete() {
     this._element.remove();
   }
 
   ownLikePos() {
     return this._data.likes.findIndex((like) => {
-      return like._id == CURRENT_USER.getUserInfo()._id;
+      return like._id == this._currentUserId;
     });
   }
 
@@ -60,7 +53,7 @@ export default class Card {
   }
 
   isOwnCard() {
-    return this._data.owner._id == CURRENT_USER.getUserInfo()._id;
+    return this._data.owner._id == this._currentUserId;
   }
 
   generateCard() {
