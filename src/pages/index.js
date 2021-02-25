@@ -47,6 +47,8 @@ const popupUpdateAvatar = new PopupWithForm(
     submit: (inputValues) => {
       return API.updateCurrentUserAvatar(inputValues.avatar).then((data) => {
         CURRENT_USER.setUserInfo(data);
+      }).catch((err) => {
+        console.log(err);
       });
     }
  }
@@ -73,6 +75,8 @@ const popupEdit = new EditPopup(
         about: inputValues.job
       }).then((data) => {
         CURRENT_USER.setUserInfo(data);
+      }).catch((err) => {
+        console.log(err);
       });
     }
   }
@@ -94,6 +98,8 @@ const popupConfirmCard = new PopupWithConfirm(
   { confirm: (card) => {
       API.deleteCard(card._data._id).then(() => {
         card.delete();
+      }).catch((err) => {
+        console.log(err);
       });
     }
   }
@@ -118,6 +124,8 @@ Promise.all([
 
         return API.addCard(card).then((apiCard) => {
           renderCard(apiCard);
+        }).catch((err) => {
+          console.log(err);
         });
       },
       validate: () => {
@@ -151,10 +159,14 @@ Promise.all([
             API.unlikeCard(c._data._id).then(() => {
               c._data.likes.splice(c.ownLikePos(), 1);
               c.updateData(c._data);
+            }).catch((err) => {
+              console.log(err);
             });
           } else {
             API.likeCard(c._data._id).then((newData) => {
               c.updateData(newData);
+            }).catch((err) => {
+              console.log(err);
             });
           }
         }
