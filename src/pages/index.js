@@ -45,11 +45,8 @@ const popupUpdateAvatar = new PopupWithForm(
       updateAvatarFormValidator.validate();
     },
     submit: (inputValues) => {
-      popupUpdateAvatar.lock();
-      API.updateCurrentUserAvatar(inputValues.avatar).then((data) => {
+      return API.updateCurrentUserAvatar(inputValues.avatar).then((data) => {
         CURRENT_USER.setUserInfo(data);
-      }).finally(() => {
-        popupUpdateAvatar.unlock();
       });
     }
  }
@@ -71,14 +68,11 @@ const popupEdit = new EditPopup(
       editFormValidator.validate();
     },
     submit: (inputValues) => {
-      popupEdit.lock();
-      API.updateCurrentUser({
+      return API.updateCurrentUser({
         name: inputValues.name,
         about: inputValues.job
       }).then((data) => {
         CURRENT_USER.setUserInfo(data);
-      }).finally(() => {
-        popupEdit.unlock();
       });
     }
   }
@@ -122,11 +116,8 @@ Promise.all([
           link : inputValues.link
         };
 
-        popupAdd.lock();
-        API.addCard(card).then((apiCard) => {
+        return API.addCard(card).then((apiCard) => {
           renderCard(apiCard);
-        }).finally(() => {
-          popupAdd.unlock();
         });
       },
       validate: () => {

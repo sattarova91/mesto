@@ -30,9 +30,12 @@ export default class PopupWithForm extends Popup {
   _handleSubmit(evt) {
     evt.preventDefault();
 
-    this._submitCallback(this._getInputValues());
-
-    this.close();
+    // Этот callback должен возвращать промис.
+    this.lock();
+    this._submitCallback(this._getInputValues()).finally(() => {
+      this.close();
+      this.unlock();
+    });
   }
 
   open() {
