@@ -105,75 +105,73 @@ const popupConfirmCard = new PopupWithConfirm(
   }
 );
 
+const popupAdd = new PopupWithForm(
+  '.popup-add',
+  { submit: (inputValues) => {
+      const card = {
+        name : inputValues.title,
+        link : inputValues.link
+      };
+
+      return API.addCard(card).then((apiCard) => {
+        renderCard(apiCard);
+      }).catch((err) => {
+        console.log(err);
+      });
+    },
+    validate: () => {
+      addFormValidator.validate();
+    }
+  }
+);
+function renderCard(card) {
+  const c = new Card(
+    CURRENT_USER.getUserInfo()._id,
+    card, '.card__template', {
+      handleCardClick: (name, link) => {
+        popupOpenImg.open(name, link);
+      },
+      handleDeleteClick: () => {
+        popupConfirmCard.open(c);
+      },
+      handeLikeClick: () => {
+        if(c.isOwnLiked()) {
+          API.unlikeCard(c._data._id).then(() => {
+            c._data.likes.splice(c.ownLikePos(), 1);
+            c.updateData(c._data);
+          }).catch((err) => {
+            console.log(err);
+          });
+        } else {
+          API.likeCard(c._data._id).then((newData) => {
+            c.updateData(newData);
+          }).catch((err) => {
+            console.log(err);
+          });
+        }
+      }
+    }
+  );
+  cardsSection.addItem(c.generateCard());
+}
+
+const cardsSection = new Section({
+  items: [],
+  renderer: renderCard
+}, '.elements');
+
 //////// Data Init
-
-
 Promise.all([
   API.getCurrentUser(),
   API.getInitialCards()
 ]).then(([currentUserData, apiCards]) => {
   CURRENT_USER.setUserInfo(currentUserData);
 
-  const popupAdd = new PopupWithForm(
-    '.popup-add',
-    { submit: (inputValues) => {
-        const card = {
-          name : inputValues.title,
-          link : inputValues.link
-        };
-
-        return API.addCard(card).then((apiCard) => {
-          renderCard(apiCard);
-        }).catch((err) => {
-          console.log(err);
-        });
-      },
-      validate: () => {
-        addFormValidator.validate();
-      }
-    }
-  );
-
   popupAddOpenButton.addEventListener('click', function() {
     popupAdd.open();
   });
 
-  const cardsSection = new Section({
-    items: apiCards.reverse(),
-    renderer: renderCard
-  }, '.elements');
-  cardsSection.renderItems();
-
-  function renderCard(card) {
-    const c = new Card(
-      currentUserData._id,
-      card, '.card__template', {
-        handleCardClick: (name, link) => {
-          popupOpenImg.open(name, link);
-        },
-        handleDeleteClick: () => {
-          popupConfirmCard.open(c);
-        },
-        handeLikeClick: () => {
-          if(c.isOwnLiked()) {
-            API.unlikeCard(c._data._id).then(() => {
-              c._data.likes.splice(c.ownLikePos(), 1);
-              c.updateData(c._data);
-            }).catch((err) => {
-              console.log(err);
-            });
-          } else {
-            API.likeCard(c._data._id).then((newData) => {
-              c.updateData(newData);
-            }).catch((err) => {
-              console.log(err);
-            });
-          }
-        }
-      }
-    );
-    cardsSection.addItem(c.generateCard());
-  }
+  cardsSection.renderItems(apiCards.reverse());
 }).catch((err)=>{     //попадаем сюда если один из промисов завершится ошибкой
   console.log(err);
 });
